@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Data</title>
+</head>
+<body>
+    <h1>Submit Data</h1>
+    <form id="dataForm">
+        <label for="textField">Text:</label>
+        <input type="text" id="textField" name="textField" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const textField = document.getElementById('textField').value;
+
+            fetch('http://localhost:5000/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text_field: textField })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    alert('Success: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
