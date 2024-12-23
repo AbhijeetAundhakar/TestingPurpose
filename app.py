@@ -11,6 +11,8 @@ db_config = {
     'database': 'example_db'
 }
 
+sdfsdfsdfsdf
+
 def get_db_connection():
     conn = mysql.connector.connect(**db_config)
     return conn
